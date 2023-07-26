@@ -1,7 +1,7 @@
 ---
 platform: {Ubuntu 22.04}
 device: {ICS-6280}
-language: {English}
+language: {Python}
 ---
 
 Connect ICS-6280 device to your Azure IoT services
