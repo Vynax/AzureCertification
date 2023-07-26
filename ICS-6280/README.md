@@ -1,62 +1,141 @@
 ---
-page_type: sample
-description: "A set of Python samples that show how a device that uses the IoT Plug and Play conventions interacts with either IoT Hub or IoT Central."
-languages:
-- python
-products:
-- azure-iot-hub
-- azure-iot-central
-- azure-iot-pnp
-urlFragment: azure-iot-pnp-device-samples-for-python
+platform: {Ubuntu 22.04}
+device: {ICS-6280}
+language: {English}
 ---
 
-# IoT Plug And Play device samples
+Connect ICS-6280 device to your Azure IoT services
+===
 
-[![Documentation](../../doc/images/docs-link-buttons/azure-documentation.svg)](https://docs.microsoft.com/azure/iot-develop/)
+<!-- --- -->
+# Table of Contents
 
-These samples demonstrate how a device that follows the [IoT Plug and Play conventions](https://docs.microsoft.com/azure/iot-pnp/concepts-convention) interacts with IoT Hub or IoT Central, to:
+-   [Introduction](#Introduction)
+-   [Prerequisites](#Prerequisites)
+-   [Prepare the Device](#preparethedevice)
+-   [Connect to Azure IoT Central](#ConnecttoCentral)
+-   [Integration with Azure IoT Explorer](#IntegrationwithAzureIoTExplorer)
+-   [Additional Links](#AdditionalLinks)
 
-- Send telemetry.
-- Update read-only and read-write properties.
-- Respond to command invocation.
+<a name="Introduction"></a>
 
-The samples demonstrate two scenarios:
+# Introduction 
 
-- An IoT Plug and Play device that implements the [Thermostat](https://devicemodels.azure.com/dtmi/com/example/thermostat-1.json) model. This model has a single interface that defines telemetry, read-only and read-write properties, and commands.
-- An IoT Plug and Play device that implements the [Temperature controller](https://devicemodels.azure.com/dtmi/com/example/temperaturecontroller-2.json) model. This model uses multiple components:
-  - The top-level interface defines telemetry, read-only property and commands.
-  - The model includes two [Thermostat](https://devicemodels.azure.com/dtmi/com/example/thermostat-1.json) components, and a [device information](https://devicemodels.azure.com/dtmi/azure/devicemanagement/deviceinformation-1.json) component.
+**About this document**
 
-## Quickstarts and tutorials
+This document describes how to connect ICS-6280 to Azure IoT Hub using the Azure IoT Explorer with certified device application and device models.
 
-To learn more about how to configure and run the Thermostat device sample with IoT Hub, see [Quickstart: Connect a sample IoT Plug and Play device application running on Linux or Windows to IoT Hub](https://docs.microsoft.com/azure/iot-pnp/quickstart-connect-device?pivots=programming-language-python).
+IoT Plug and Play certified device simplifies the process of building devices without custom device code. Using Solution builders can integrated quickly using the certified IoT Plug and Play enabled device based on Azure IoT Central as well as third-party solutions.
 
-To learn more about how to configure and run the Temperature Controller device sample with:
+This getting started guide provides step by step instruction on getting the device provisioned to Azure IoT Hub using Device Provisioning Service (DPS) and using Azure IoT Explorer to interact with device's capabilities.
 
-- IoT Hub, see [Tutorial: Connect an IoT Plug and Play multiple component device application running on Linux or Windows to IoT Hub](https://docs.microsoft.com/azure/iot-pnp/tutorial-multiple-components?pivots=programming-language-python)
-- IoT Central, see [Tutorial: Create and connect a client application to your Azure IoT Central application](https://docs.microsoft.com/azure/iot-central/core/tutorial-connect-device?pivots=programming-language-python)
+ICS-6280 Features:
+-   Intel® Elkhart lake SoC Processor, 2~4 cores
+-   260-pin DDR4 3200Mhz SO-DIMM with IBECC support x 1
+-   10/100/1000 Base-TX Ethernet x 4
+-   Supports up to 2 Pairs LAN Bypass (Optional)
+-   Support mini-card socket x 1, Micro SIM socket x 1
+-   DC 9V~48V power redundancy input with terminal block x 2
+-   2.5” SATA SSD x 1 support
+-   Support up to RS-232/422/485 COM ports x 2 (COM2 with isolation) with ESD Protection
+-   HDMI port x 1, USB 3.2 ports x 2, VGA port x 1
+-   Wide-Temp -40°C ~ 75°C Fanless Solution
 
-## Configuring the samples
+<a name="Prerequisites"></a>
+# Prerequisites
 
-Both samples use environment variables to retrieve configuration.
+You should have the following items ready before beginning the process:
 
-* If you are using a connection string to authenticate:
-  * set IOTHUB_DEVICE_SECURITY_TYPE="connectionString"
-  * set IOTHUB_DEVICE_CONNECTION_STRING="\<connection string of your device\>"
+**For Azure IoT Central**
+-   [Azure Account](https://portal.azure.com)
+-   [Azure IoT Central application](https://apps.azureiotcentral.com/)
 
-* If you are using a DPS enrollment group to authenticate:
-  * set IOTHUB_DEVICE_SECURITY_TYPE="DPS"
-  * set IOTHUB_DEVICE_DPS_ID_SCOPE="\<ID Scope of DPS instance\>"
-  * set IOTHUB_DEVICE_DPS_DEVICE_ID="\<Device's ID\>"
-  * set IOTHUB_DEVICE_DPS_DEVICE_KEY="\<Device's security key \>"
-  * set IOTHUB_DEVICE_DPS_ENDPOINT="\<DPS endpoint\>"
 
-## Caveats
+**For Azure IoT Hub**
+-   [Azure IoT Hub Instance](https://docs.microsoft.com/en-us/azure/iot-hub/about-iot-hub)
+-   [Azure IoT Hub Device Provisioning Service](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision)
+-   [Azure IoT Public Model Repository](https://docs.microsoft.com/en-us/azure/iot-pnp/concepts-model-repository)
 
-* Azure IoT Plug and Play is only supported for MQTT and MQTT over WebSockets for the Azure IoT Python Device SDK.  Modifying these samples to use AMQP, AMQP over WebSockets, or HTTP protocols **will not work**.
+<a name="preparethedevice"></a>
+# Prepare the Device.
 
-* When the thermostat receives a desired temperature, it has no actual affect on the current temperature.
+### Environmental setup
 
-* The command `getMaxMinReport` allows the application to specify statistics of the temperature since a given date.  To keep the sample simple, we ignore this field and instead return statistics from the some portion of the lifecycle of the executable.
+#### Hardware Environment
 
-* The temperature controller implements a command named `reboot` which takes a request payload indicating the delay in seconds.  The sample will ignore doing anything on this command.
+-	Prepare the following devices :
+	1.	ICS-6280
+	2.	SATA HDD or SATA SSD
+	3.	monitor with I/O: HDMI or VGA
+	4.	keyboard and mouse
+	5.	RJ-45 cable
+-	Connect all the above devices to the ICS-6280.
+-	Power on ICS-6280.
+-	Connect to Network.
+
+#### Software Environment
+
+-	Install Ubuntu 22.04 LTS into ICS-6280.
+-	Download the source code from this [Github](https://github.com/Vynax/AzureCertification) and check the [ICS-6280](https://github.com/Vynax/AzureCertification/tree/main/ICS-6280) folder.
+-	Install [Python](https://www.python.org/downloads/) and make sure the Python environment is ready ( at least Python 3.7 ).
+-	Install [Git](https://git-scm.com/) \
+	or type "sudo apt install git" at Terminal.
+
+#### IOT Hub & DPS configuration
+Please refer to this [tutorial](https://docs.microsoft.com/en-us/azure/iot-pnp/set-up-environment) to complete the following procedures :
+1.	Use Azure commands or Azure portal to create a Resource Group、an Iot Hub
+and a Device Provisioning Service
+2.	To link the DPS instance to your IoT hub
+3.	To create your device by individual device enrollment in your DPS instance.
+4.	Make a note of the DPS information (DPS endpoint/Registration ID/ID
+Scope/Symmetric key).
+5.	Set the DPS information got from the former step in "test.sh".
+```Shell
+export IOTHUB_DEVICE_SECURITY_TYPE="DPS"
+export IOTHUB_DEVICE_DPS_ID_SCOPE=""
+export IOTHUB_DEVICE_DPS_DEVICE_ID=""
+export IOTHUB_DEVICE_DPS_DEVICE_KEY=""
+export IOTHUB_DEVICE_DPS_ENDPOINT="global.azure-devices-provisioning.net"
+export KEYPAD_INTERRUPT="ENABLE"
+#If KEYPAD_INTERRUPT set DISABLE, the program will never stop
+#If KEYPAD_INTERRUPT set ENABLE, you can stop the program by pressing 'q' key
+```
+
+<a name="ConnecttoCentral"></a>
+# Connect to Azure IoT Central
+
+1.  Create an application \
+Please refer to this [tutorial](https://docs.microsoft.com/en-us/azure/iot-central/core/quick-deploy-iot-central) to create a "Custom application" template.
+
+2.  Create a device template from the device catalog \
+Please refer to this [tutorial](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-set-up-template#create-a-device-template-from-the-device-catalog) to create the ICS-6280 device template.
+
+3.  Add a device \
+Add a new device under ICS-6280 device template. \
+Make a note of the device ID.
+
+4.  Get connection information
+- ID scope : In your IoT Central application, navigate to Permissions > Device connection groups. Make a note of the ID scope value.
+- Group primary key : In your IoT Central application, navigate to Permissions > Device connection groups > SAS-IoT-Devices. Make a note of the shared access signature Primary key value.
+
+![image](iot_central_1.png)
+![image](iot_central_2.png)
+
+Use the Cloud Shell to generate a device specific key from the group SAS key you just retrieved using the Azure CLI
+
+```Shell
+az extension add --name azure-iot
+az iot central device compute-device-key --device-id "sample-device-01" --pk "the group SAS primary key value"
+```
+
+Make a note of the generated device key, and the ID scope for this application and flash it on the device
+
+<a name="AdditionalLinks"></a>
+# Additional Links
+
+Please refer to the below link for additional information for Plug and Play 
+
+-   [Manage cloud device messaging with Azure-IoT-Explorer](https://github.com/Azure/azure-iot-explorer/releases)
+-   [Import the Plug and Play model](https://docs.microsoft.com/en-us/azure/iot-pnp/concepts-model-repository)
+-   [Configure to connect to IoT Hub](https://docs.microsoft.com/en-us/azure/iot-pnp/quickstart-connect-device-c)
+-   [How to use IoT Explorer to interact with the device ](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer#install-azure-iot-explorer)   
