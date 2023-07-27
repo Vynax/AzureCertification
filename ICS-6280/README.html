@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="connect-ics-6280-device-to-your-azure-iot-services">Connect ICS-6280 device to your Azure IoT services</h1>
+<!-- --- -->
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#prepare-the-device">Prepare the Device</a></li>
+<li><a href="#connect-to-azure-iot-central">Connect to Azure IoT Central</a></li>
+<li><a href="#additional-links">Additional Links</a></li>
+</ul>
+<p><a name="Introduction"></a></p>
+<h1 id="introduction">Introduction</h1>
+<p><strong>About this document</strong></p>
+<p>This document describes how to connect ICS-6280 to Azure IoT Hub using the Azure IoT Explorer with certified device application and device models.</p>
+<p>IoT Plug and Play certified device simplifies the process of building devices without custom device code. Using Solution builders can integrated quickly using the certified IoT Plug and Play enabled device based on Azure IoT Central as well as third-party solutions.</p>
+<p>This getting started guide provides step by step instruction on getting the device provisioned to Azure IoT Hub using Device Provisioning Service (DPS) and using Azure IoT Explorer to interact with device's capabilities.</p>
+<p>ICS-6280 Features:</p>
+<ul>
+<li>Intel® Elkhart lake SoC Processor, 2~4 cores</li>
+<li>260-pin DDR4 3200Mhz SO-DIMM with IBECC support x 1</li>
+<li>10/100/1000 Base-TX Ethernet x 4</li>
+<li>Supports up to 2 Pairs LAN Bypass (Optional)</li>
+<li>Support mini-card socket x 1, Micro SIM socket x 1</li>
+<li>DC 9V~48V power redundancy input with terminal block x 2</li>
+<li>2.5” SATA SSD x 1 support</li>
+<li>Support up to RS-232/422/485 COM ports x 2 (COM2 with isolation) with ESD Protection</li>
+<li>HDMI port x 1, USB 3.2 ports x 2, VGA port x 1</li>
+<li>Wide-Temp -40°C ~ 75°C Fanless Solution</li>
+</ul>
+<p><a name="Prerequisites"></a></p>
+<h1 id="prerequisites">Prerequisites</h1>
+<p>You should have the following items ready before beginning the process:</p>
+<p><strong>For Azure IoT Central</strong></p>
+<ul>
+<li><a href="https://portal.azure.com">Azure Account</a></li>
+<li><a href="https://apps.azureiotcentral.com/">Azure IoT Central application</a></li>
+</ul>
+<p><strong>For Azure IoT Hub</strong></p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-hub/about-iot-hub">Azure IoT Hub Instance</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision">Azure IoT Hub Device Provisioning Service</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-pnp/concepts-model-repository">Azure IoT Public Model Repository</a></li>
+</ul>
+<p><a name="preparethedevice"></a></p>
+<h1 id="prepare-the-device">Prepare the Device.</h1>
+<h3 id="environmental-setup">Environmental setup</h3>
+<h4 id="hardware-environment">Hardware Environment</h4>
+<ul>
+<li>Prepare the following devices :
+<ol>
+<li>ICS-6280</li>
+<li>SATA HDD or SATA SSD</li>
+<li>monitor with I/O: HDMI or VGA</li>
+<li>keyboard and mouse</li>
+<li>RJ-45 cable</li>
+</ol>
+</li>
+<li>Connect all the above devices to the ICS-6280.</li>
+<li>Power on ICS-6280.</li>
+<li>Connect to Network.</li>
+</ul>
+<h4 id="software-environment">Software Environment</h4>
+<ul>
+<li>Install Ubuntu 22.04 LTS into ICS-6280.</li>
+<li>Download the source code from this <a href="https://github.com/aaeonnsd/AzureCertification">Github</a> and check the <a href="https://github.com/aaeonnsd/AzureCertification/tree/main/ICS-6280">ICS-6280</a> folder.</li>
+<li>Install <a href="https://www.python.org/downloads/">Python</a> and make sure the Python environment is ready ( at least Python 3.7 ).</li>
+<li>Install <a href="https://git-scm.com/">Git</a> <br>
+or type &quot;sudo apt install git&quot; at Terminal.</li>
+</ul>
+<h4 id="iot-hub--dps-configuration">IOT Hub &amp; DPS configuration</h4>
+<p>Please refer to this <a href="https://docs.microsoft.com/en-us/azure/iot-pnp/set-up-environment">tutorial</a> to complete the following procedures :</p>
+<ol>
+<li>Use Azure commands or Azure portal to create a Resource Group、an Iot Hub
+and a Device Provisioning Service</li>
+<li>To link the DPS instance to your IoT hub</li>
+<li>To create your device by individual device enrollment in your DPS instance.</li>
+<li>Make a note of the DPS information (DPS endpoint/Registration ID/ID
+Scope/Symmetric key).</li>
+<li>Set the DPS information got from the former step in &quot;test.sh&quot;.</li>
+</ol>
+<div style="page-break-after: always"></div>
+<pre class="hljs"><code><div>export IOTHUB_DEVICE_SECURITY_TYPE="DPS"
+export IOTHUB_DEVICE_DPS_ID_SCOPE=""
+export IOTHUB_DEVICE_DPS_DEVICE_ID=""
+export IOTHUB_DEVICE_DPS_DEVICE_KEY=""
+export IOTHUB_DEVICE_DPS_ENDPOINT="global.azure-devices-provisioning.net"
+export KEYPAD_INTERRUPT="ENABLE"
+<span class="hljs-meta">#</span><span class="bash">If KEYPAD_INTERRUPT <span class="hljs-built_in">set</span> DISABLE, the program will never stop</span>
+<span class="hljs-meta">#</span><span class="bash">If KEYPAD_INTERRUPT <span class="hljs-built_in">set</span> ENABLE, you can stop the program by pressing <span class="hljs-string">'q'</span> key</span>
+</div></code></pre>
+<p><a name="ConnecttoCentral"></a></p>
+<h1 id="connect-to-azure-iot-central">Connect to Azure IoT Central</h1>
+<ol>
+<li>
+<p>Create an application <br>
+Please refer to this <a href="https://docs.microsoft.com/en-us/azure/iot-central/core/quick-deploy-iot-central">tutorial</a> to create a &quot;Custom application&quot; template.</p>
+</li>
+<li>
+<p>Create a device template from the device catalog <br>
+Please refer to this <a href="https://docs.microsoft.com/en-us/azure/iot-central/core/howto-set-up-template#create-a-device-template-from-the-device-catalog">tutorial</a> to create the ICS-6280 device template.</p>
+</li>
+<li>
+<p>Add a device <br>
+Add a new device under ICS-6280 device template. <br>
+Make a note of the device ID.</p>
+</li>
+<li>
+<p>Get connection information</p>
+</li>
+</ol>
+<ul>
+<li>ID scope : In your IoT Central application, navigate to Permissions &gt; Device connection groups. Make a note of the ID scope value.</li>
+<li>Group primary key : In your IoT Central application, navigate to Permissions &gt; Device connection groups &gt; SAS-IoT-Devices. Make a note of the shared access signature Primary key value.</li>
+</ul>
+<!-- # hi -->
+<p><img src="iot_central_1.png" alt="image">
+<img src="iot_central_2.png" alt="image"></p>
+<!-- <center>
+<img src="iot_central_1.png" alt="" style="float: middle; width:80%; height:80%; "/>
+<img src="iot_central_2.png" alt="" style="width:80%; height:80%; "/>
+</center> -->
+<p>Use the Cloud Shell to generate a device specific key from the group SAS key you just retrieved using the Azure CLI</p>
+<pre class="hljs"><code><div>az extension add --name azure-iot
+az iot central device compute-device-key --device-id "sample-device-01" --pk "the group SAS primary key value"
+</div></code></pre>
+<p>Make a note of the generated device key, and the ID scope for this application and set them to &quot;test.sh&quot;.</p>
+<p><a name="AdditionalLinks"></a></p>
+<h1 id="additional-links">Additional Links</h1>
+<p>Please refer to the below link for additional information for Plug and Play</p>
+<ul>
+<li><a href="https://github.com/Azure/azure-iot-explorer/releases">Manage cloud device messaging with Azure-IoT-Explorer</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-pnp/concepts-model-repository">Import the Plug and Play model</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-pnp/quickstart-connect-device-c">Configure to connect to IoT Hub</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer#install-azure-iot-explorer">How to use IoT Explorer to interact with the device </a></li>
+</ul>
+
+</body>
+</html>

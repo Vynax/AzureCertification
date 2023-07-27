@@ -10,12 +10,11 @@ Connect ICS-6280 device to your Azure IoT services
 <!-- --- -->
 # Table of Contents
 
--   [Introduction](#Introduction)
--   [Prerequisites](#Prerequisites)
--   [Prepare the Device](#preparethedevice)
--   [Connect to Azure IoT Central](#ConnecttoCentral)
--   [Integration with Azure IoT Explorer](#IntegrationwithAzureIoTExplorer)
--   [Additional Links](#AdditionalLinks)
+-   [Introduction](#introduction)
+-   [Prerequisites](#prerequisites)
+-   [Prepare the Device](#prepare-the-device)
+-   [Connect to Azure IoT Central](#connect-to-azure-iot-central)
+-   [Additional Links](#additional-links)
 
 <a name="Introduction"></a>
 
@@ -40,6 +39,8 @@ ICS-6280 Features:
 -   Support up to RS-232/422/485 COM ports x 2 (COM2 with isolation) with ESD Protection
 -   HDMI port x 1, USB 3.2 ports x 2, VGA port x 1
 -   Wide-Temp -40°C ~ 75°C Fanless Solution
+
+<div style="page-break-after: always"></div>
 
 <a name="Prerequisites"></a>
 # Prerequisites
@@ -76,10 +77,12 @@ You should have the following items ready before beginning the process:
 #### Software Environment
 
 -	Install Ubuntu 22.04 LTS into ICS-6280.
--	Download the source code from this [Github](https://github.com/Vynax/AzureCertification) and check the [ICS-6280](https://github.com/Vynax/AzureCertification/tree/main/ICS-6280) folder.
+-	Download the source code from this [Github](https://github.com/aaeonnsd/AzureCertification) and check the [ICS-6280](https://github.com/aaeonnsd/AzureCertification/tree/main/ICS-6280) folder.
 -	Install [Python](https://www.python.org/downloads/) and make sure the Python environment is ready ( at least Python 3.7 ).
 -	Install [Git](https://git-scm.com/) \
 	or type "sudo apt install git" at Terminal.
+
+<div style="page-break-after: always"></div>
 
 #### IOT Hub & DPS configuration
 Please refer to this [tutorial](https://docs.microsoft.com/en-us/azure/iot-pnp/set-up-environment) to complete the following procedures :
@@ -90,6 +93,7 @@ and a Device Provisioning Service
 4.	Make a note of the DPS information (DPS endpoint/Registration ID/ID
 Scope/Symmetric key).
 5.	Set the DPS information got from the former step in "test.sh".
+
 ```Shell
 export IOTHUB_DEVICE_SECURITY_TYPE="DPS"
 export IOTHUB_DEVICE_DPS_ID_SCOPE=""
@@ -118,17 +122,24 @@ Make a note of the device ID.
 - ID scope : In your IoT Central application, navigate to Permissions > Device connection groups. Make a note of the ID scope value.
 - Group primary key : In your IoT Central application, navigate to Permissions > Device connection groups > SAS-IoT-Devices. Make a note of the shared access signature Primary key value.
 
+<!-- # hi -->
 ![image](iot_central_1.png)
 ![image](iot_central_2.png)
+<!-- <center>
+<img src="iot_central_1.png" alt="" style="float: middle; width:80%; height:80%; "/>
+<img src="iot_central_2.png" alt="" style="width:80%; height:80%; "/>
+</center> -->
 
 Use the Cloud Shell to generate a device specific key from the group SAS key you just retrieved using the Azure CLI
+
+<div style="page-break-after: always"></div>
 
 ```Shell
 az extension add --name azure-iot
 az iot central device compute-device-key --device-id "sample-device-01" --pk "the group SAS primary key value"
 ```
 
-Make a note of the generated device key, and the ID scope for this application and flash it on the device
+Make a note of the generated device key, and the ID scope for this application and set them to "test.sh".
 
 <a name="AdditionalLinks"></a>
 # Additional Links
