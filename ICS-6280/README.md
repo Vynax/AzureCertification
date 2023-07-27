@@ -69,7 +69,7 @@ You should have the following items ready before beginning the process:
 	2.	SATA HDD or SATA SSD
 	3.	monitor with I/O: HDMI or VGA
 	4.	keyboard and mouse
-	5.	RJ-45 cable
+	5.	RJ-45 Ethernet cable
 -	Connect all the above devices to the ICS-6280.
 -	Power on ICS-6280.
 -	Connect to Network.
