@@ -76,10 +76,10 @@ You should have the following items ready before beginning the process:
 #### Software Environment
 
 -	Install Ubuntu 22.04 LTS into ICS-6280.
--	Download the source code from this [Github](https://github.com/aaeonnsd/AzureCertification) and check the [ICS-6280](https://github.com/aaeonnsd/AzureCertification/tree/main/ICS-6280) folder.
--	Install [Python](https://www.python.org/downloads/) and make sure the Python environment is ready ( at least Python 3.7 ).
 -	Install [Git](https://git-scm.com/) \
 	or type "sudo apt install git" at Terminal.
+-	Install [Python](https://www.python.org/downloads/) and make sure the Python environment is ready ( at least Python 3.7 ).
+-	Clone the source code from this [Github](https://github.com/henry1758f/Azure-IoTHub-general-device) and check the "Azure-IoTHub-general-device" folder.
 
 #### IOT Hub & DPS configuration
 Please refer to this [tutorial](https://docs.microsoft.com/en-us/azure/iot-pnp/set-up-environment) to complete the following procedures :
@@ -89,7 +89,7 @@ and a Device Provisioning Service
 3.	To create your device by individual device enrollment in your DPS instance.
 4.	Make a note of the DPS information (DPS endpoint/Registration ID/ID
 Scope/Symmetric key).
-5.	Set the DPS information got from the former step in "test.sh".
+5.	Set the DPS information got from the former step in <div style="display: inline">Azure-IoTHub-general-device-main/run.sh</div>.
 
 ```Shell
 export IOTHUB_DEVICE_SECURITY_TYPE="DPS"
@@ -100,6 +100,14 @@ export IOTHUB_DEVICE_DPS_ENDPOINT="global.azure-devices-provisioning.net"
 export KEYPAD_INTERRUPT="ENABLE"
 #If KEYPAD_INTERRUPT set DISABLE, the program will never stop
 #If KEYPAD_INTERRUPT set ENABLE, you can stop the program by pressing 'q' key
+```
+To make <span style="display: inline">run.sh</span> excutable please run
+```Shell
+chmod +x run.sh
+```
+Then finally, run the script file
+```Shell
+./run.sh
 ```
 
 <a name="ConnecttoCentral"></a>
@@ -119,8 +127,10 @@ Make a note of the device ID.
 - 	ID scope : In your IoT Central application, navigate to Permissions > Device connection groups. Make a note of the ID scope value.
 - 	Group primary key : In your IoT Central application, navigate to Permissions > Device connection groups > SAS-IoT-Devices. Make a note of the shared access signature Primary key value.
 
-![image](iot_central_1.png)
-![image](iot_central_2.png)
+<img src=iot_central_1.png style="width: 80%; display: block; margin: 0 auto"/>
+<img src=iot_central_2.png style="width: 80%; display: block; margin: 0 auto"/>
+<!-- ![image](iot_central_1.png) -->
+<!-- ![image](iot_central_2.png) -->
 <!-- <center>
 <img src="iot_central_1.png" alt="" style="float: middle; width:80%; height:80%; "/>
 <img src="iot_central_2.png" alt="" style="width:80%; height:80%; "/>
@@ -132,10 +142,11 @@ Use the Cloud Shell to generate a device specific key from the group SAS key you
 
 ```Shell
 az extension add --name azure-iot
-az iot central device compute-device-key --device-id "sample-device-01" --pk "the group SAS primary key value"
+az iot central device compute-device-key --device-id "sample-device-01" \
+--pk "the group SAS primary key value"
 ```
 
-Make a note of the generated device key, and the ID scope for this application and set them to "test.sh".
+Make a note of the generated device key, and the ID scope for this application and set them to <span style="display: inline">run.sh</span>.
 
 <a name="AdditionalLinks"></a>
 # Additional Links

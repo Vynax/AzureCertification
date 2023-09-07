@@ -419,7 +419,7 @@ code {
 <li>SATA HDD or SATA SSD</li>
 <li>monitor with I/O: HDMI or VGA</li>
 <li>keyboard and mouse</li>
-<li>RJ-45 cable</li>
+<li>RJ-45 Ethernet cable</li>
 </ol>
 </li>
 <li>Connect all the above devices to the ICS-6280.</li>
@@ -445,7 +445,6 @@ and a Device Provisioning Service</li>
 Scope/Symmetric key).</li>
 <li>Set the DPS information got from the former step in &quot;test.sh&quot;.</li>
 </ol>
-<div style="page-break-after: always"></div>
 <pre class="hljs"><code><div>export IOTHUB_DEVICE_SECURITY_TYPE="DPS"
 export IOTHUB_DEVICE_DPS_ID_SCOPE=""
 export IOTHUB_DEVICE_DPS_DEVICE_ID=""
@@ -477,16 +476,16 @@ Make a note of the device ID.</p>
 </ol>
 <ul>
 <li>ID scope : In your IoT Central application, navigate to Permissions &gt; Device connection groups. Make a note of the ID scope value.</li>
-<li>Group primary key : In your IoT Central application, navigate to Permissions &gt; Device connection groups &gt; SAS-IoT-Devices. Make a note of the shared access signature Primary key value.</li>
+<li>Group primary key : In your IoT Central application, navigate to Permissions &gt; Device connection groups &gt; SAS-IoT-Devices. Make a note of the shared access signature Primary key value. <br>
+<img src="iot_central_1.png" alt="image">
+<img src="iot_central_2.png" alt="image"></li>
 </ul>
-<!-- # hi -->
-<p><img src="iot_central_1.png" alt="image">
-<img src="iot_central_2.png" alt="image"></p>
 <!-- <center>
 <img src="iot_central_1.png" alt="" style="float: middle; width:80%; height:80%; "/>
 <img src="iot_central_2.png" alt="" style="width:80%; height:80%; "/>
 </center> -->
 <p>Use the Cloud Shell to generate a device specific key from the group SAS key you just retrieved using the Azure CLI</p>
+<!-- <div style="page-break-after: always"></div> -->
 <pre class="hljs"><code><div>az extension add --name azure-iot
 az iot central device compute-device-key --device-id "sample-device-01" --pk "the group SAS primary key value"
 </div></code></pre>
